@@ -1,0 +1,27 @@
+<project name="Argentum" default="compilar">
+	<target name="compilar">
+		<delete dir="bin" />
+		<mkdir dir="bin" />
+		<javac srcdir="src/br/com/streamsoft/teste" destdir="bin" >
+			<classpath>
+				<fileset dir="lib">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+	<target name="empacotar" depends="compilar">
+		<mkdir dir="jar" />
+		<jar destfile="jar/teste.jar" basedir="bin"/>
+	</target>
+	<target name="executar" depends="empacotar">
+		<java classname="br.com.streamsoft.teste.Main" fork="true">
+			<classpath>
+				<filelist files="jar/teste.jar"/>
+					<fileset dir="lib">
+						<include name="*.jar" />
+					</fileset>
+			</classpath>
+		</java>
+	</target>
+</project>
